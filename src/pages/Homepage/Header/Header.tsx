@@ -13,7 +13,7 @@ const Header = ({ login }: any) => {
                     <a className="nav__logo" href="/">Forex Tranding App</a>
 
                     {
-                        login == true && <ul className="nav__list">
+                        login === true && <ul className="nav__list">
                             <li>
                                 <Link to="/signin">
                                     <Button className="nav__button" color="primary">Sign in</Button>
@@ -28,15 +28,20 @@ const Header = ({ login }: any) => {
                     }
 
                     {
-                        login == false && <ul className="nav__list">
+                        login === false && <ul className="nav__list">
                             <li>
                                 <Link to="/portifolio">
                                     <Button classes={{root: 'button'}} color="primary">Wallet</Button>
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/forextrade">
+                                <Link to="/trading">
                                     <Button classes={{root: 'button'}} color="primary">Forex Trade</Button>
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="/transactions">
+                                    <Button classes={{root: 'button'}} color="primary">Transactions History</Button>
                                 </Link>
                             </li>
                             <li>

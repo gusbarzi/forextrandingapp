@@ -1,0 +1,10 @@
+.box__container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.div__h1 {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+}

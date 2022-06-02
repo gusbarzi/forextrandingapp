@@ -102,3 +102,18 @@ main {
     letter-spacing: 3px;
     margin-right: 32px;
 }
+
+h1 {
+    margin-left: 30px;
+    Font-weight: bold;
+    font-size: 3em;
+    height: 100px;
+}
+
+h2 {
+    margin-left: 30px;
+    font-size: 2em;
+    height: 100px;
+    margin-top: 30px;
+    margin-right: 30px;
+}
