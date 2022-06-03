@@ -8,16 +8,24 @@ import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Logout from '@mui/icons-material/Logout';
 import { Link } from 'react-router-dom';
+import { Button } from '@mui/material';
+import { useState } from 'react';
+import { LogoutOutlined } from '@mui/icons-material';
 
 export default function Userbutton() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+
+
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
+
+
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   return (
     <React.Fragment>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
@@ -74,9 +82,9 @@ export default function Userbutton() {
         </MenuItem>
         <MenuItem>
           <ListItemIcon>
-            <Logout fontSize="small" />
+            <Logout fontSize="medium" />
           </ListItemIcon>
-          Logout
+          <Button color="secondary" variant="text">Logout</Button>
         </MenuItem>
       </Menu>
     </React.Fragment>

@@ -12,7 +12,7 @@ const columns: GridColDef[] = [
   },
   {
     field: 'Data',
-    headerName: 'Data',
+    headerName: 'Transaction Date',
     description: 'This column has a value getter and is not sortable.',
     sortable: false,
     width: 460,

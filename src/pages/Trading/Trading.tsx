@@ -3,9 +3,14 @@ import { Container, Typography, TextField, Button } from "@mui/material"
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 import './trading.css';
+import { AirlineSeatIndividualSuiteRounded } from '@mui/icons-material';
 
 export const Trading = () => {
     const [dolar, setDolar] = useState(0);
+    const [libra, setLibra]: any = useState(0);
+    const [total, setTotal]: any = useState();
+    const [depositValue, setValue] = useState("");
+
 
     useEffect(() => {
         const getData = async () => {
@@ -22,6 +27,23 @@ export const Trading = () => {
         getData();
     }, []);
 
+    const convert = () => {
+        setTotal(dolar * libra);
+    };
+
+    const deposit = async () => {
+        await axios
+        .post("https://localhost:3001/portifolio", {depositValue})
+        .then((response) => {
+            console.log(depositValue);
+            console.log(response.data);
+            setLibra(libra + Number(response.data.gbp));
+            setValue("");
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    };
 
     return (
         <Container maxWidth="md" >
@@ -58,7 +80,7 @@ export const Trading = () => {
                                 Balance
                             </h1>
                             <h1 className="div__h1">
-                                £0,00000
+                                £{libra}
                             </h1>
                         </div>
                         <Typography>Dolar(US$)</Typography>
@@ -84,13 +106,14 @@ export const Trading = () => {
                                 width: 350,
                             }}
                             margin="normal"
+                            onChange ={(e) => setLibra(e.target.value)}
                         />
                         <Typography>GBP(£)/USD(US$)</Typography>
                         <TextField
                             size="small"
                             disabled
                             id="outlined-basic"
-                            label="Total"
+                            label={total}
                             variant="outlined"
                             sx={{
                                 width: 350,
@@ -98,6 +121,7 @@ export const Trading = () => {
                             margin="normal"
                         />
                         <Button
+                            onClick={(e) => convert()}
                             sx={{
                                 width: 350,
                             }}
