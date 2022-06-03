@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Vinput from '../../shared/components/Vinput';
+import { Typography } from '@mui/material';
 
 const style = {
     position: 'absolute' as 'absolute',
@@ -29,7 +30,16 @@ export const DepositModal = () => {
             <div className="portifolio">
                 <h2>Balance</h2>
                 <nav>
-                    <p className="nav__logo">GPB 0,0000</p>
+                    <Typography
+                        sx={{
+                            m: 1,
+                        }}
+                     variant="h6" 
+                     gutterBottom 
+                     component="div"
+                    >
+                         GBP 0,00000
+                    </Typography>
                     <ul className="nav__list">
                         <li>
                             <Link to="/portifolio">

@@ -1,3 +1,4 @@
+import { Box } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 
 const columns: GridColDef[] = [
@@ -23,21 +24,47 @@ const columns: GridColDef[] = [
 
 const rows = [
   { id: 1, firstName: 'Gustavo', lastName: 'Barzi', amount: 15.6651651 },
-  { id: 2, firstName: 'Tainá', lastName: 'Oliveira', amount: 42.4554545 },
-  { id: 3, firstName: 'Marcio', lastName: 'Gonçalves', amount: 45.65465465 },
+  { id: 2, firstName: 'Gustavo', lastName: 'Barzi', amount: 42.4554545 },
+  { id: 3, firstName: 'Gustavo', lastName: 'Barzi', amount: 45.65465465 },
+  { id: 4, firstName: 'Gustavo', lastName: 'Barzi', amount: 455.65465465 },
+  { id: 5, firstName: 'Gustavo', lastName: 'Barzi', amount: 454.65465465 },
+  { id: 6, firstName: 'Gustavo', lastName: 'Barzi', amount: 455.65465465 },
+  { id: 7, firstName: 'Gustavo', lastName: 'Barzi', amount: 456.65465465 },
+  { id: 8, firstName: 'Gustavo', lastName: 'Barzi', amount: 452.65465465 },
 ];
 
 export const Transactions = () => {
   return (
-    <div style={{ height: 400, width: '100%' }}>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        pageSize={5}
-        rowsPerPageOptions={[5]}
-        checkboxSelection
-      />
-    </div>
+    <Box
+      sx={{
+        width: "100%",
+        height: 890,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          width: 950,
+          height: 600,
+          backgroundColor: '#e9e9e9',
+          p: 2,
+          m: 1,
+          borderRadius: 5,
+        }}
+      >
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          pageSize={8}
+          rowsPerPageOptions={[5]}
+          checkboxSelection
+        />
+      </Box>
+    </Box>
   );
 }
 
