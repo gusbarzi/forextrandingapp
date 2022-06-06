@@ -15,7 +15,7 @@ import { useState, useEffect } from 'react';
 import Trading from './pages/Trading/Trading';
 
 export const App = () => {
-  const [login, setLogin] = useState(true)
+  const [login, setLogin] = useState(false)
 
   return (
     <ThemeProvider theme={LightTheme}>
