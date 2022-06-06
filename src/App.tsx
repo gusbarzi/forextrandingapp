@@ -4,7 +4,6 @@ import { LightTheme } from './shared/themes';
 //React Routes Dom
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Portifolio from './pages/Portifolio/Portifolio';
-import axios from 'axios';
 //Pages, components
 import Header from './pages/Homepage/Header/Header';
 import Main from './pages/Homepage/Main/Main';
@@ -16,7 +15,7 @@ import { useState, useEffect } from 'react';
 import Trading from './pages/Trading/Trading';
 
 export const App = () => {
-  const [login, setLogin] = useState(false)
+  const [login, setLogin] = useState(true)
 
   return (
     <ThemeProvider theme={LightTheme}>

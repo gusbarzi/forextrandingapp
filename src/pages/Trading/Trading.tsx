@@ -77,10 +77,16 @@ export const Trading = () => {
 
                         <div className="box__container">
                             <h1 className="div__h1">
-                                Balance
+                                GBP
                             </h1>
                             <h1 className="div__h1">
-                                £{libra}
+                                £100
+                            </h1>
+                            <h1 className="div__h1">
+                                Dolar
+                            </h1>
+                            <h1 className="div__h1">
+                                US${total}
                             </h1>
                         </div>
                         <Typography>Dolar(US$)</Typography>
