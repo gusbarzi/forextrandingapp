@@ -4,7 +4,7 @@ import { useState } from "react";
 interface State {
     amount: string;
 }
-export const Vinput = () => {
+export const InputGBP = () => {
 
 const [values, setValues] = useState<State>({
     amount: ''
@@ -30,4 +30,4 @@ const handleChange =
     )
 }
 
-export default Vinput;
+export default InputGBP;
