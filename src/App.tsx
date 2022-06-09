@@ -2,7 +2,7 @@
 import { ThemeProvider } from '@emotion/react';
 import { LightTheme } from './shared/themes';
 //React Routes Dom
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Portifolio from './pages/Portifolio/Portifolio';
 //Pages, components
 import Header from './pages/Homepage/Header/Header';
@@ -12,18 +12,16 @@ import SignIn from './pages/Signin/Signin';
 import Transactions from './pages/Transactionspage/Transactions';
 import Trading from './pages/Trading/Trading';
 //Hooks
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
+import UserProvider, { UserContext } from './context/user';
 
 
 export const App = () => {
-  const [login, setLogin] = useState(false)
-
+  const { login } = useContext(UserContext);
   return (
-    <ThemeProvider theme={LightTheme}>
-      <BrowserRouter>
-
-         {login === true ? <Header login={true} /> : <Header login={false} />}
-
+    <UserProvider>
+      <ThemeProvider theme={LightTheme}>
+        <BrowserRouter>
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/register" element={<Register />} />
@@ -33,8 +31,9 @@ export const App = () => {
             <Route path="/transactions" element={<Transactions />} />
           </Routes>
 
-      </BrowserRouter>
-    </ThemeProvider>
+        </BrowserRouter>
+      </ThemeProvider>
+    </UserProvider>
   );
 }
 

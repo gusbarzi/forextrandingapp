@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { useState } from 'react';
 import { LogoutOutlined } from '@mui/icons-material';
+import Header from '../../pages/Homepage/Header/Header';
 
 export default function Userbutton() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -25,6 +26,10 @@ export default function Userbutton() {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleLogout = () => {
+    <Header home={true} />
+  }
 
   return (
     <React.Fragment>
@@ -84,7 +89,15 @@ export default function Userbutton() {
           <ListItemIcon>
             <Logout fontSize="medium" />
           </ListItemIcon>
-          <Button color="secondary" variant="text">Logout</Button>
+
+          <Button
+            onClick={handleLogout}
+            color="secondary"
+            variant="text"
+          >
+            Logout
+          </Button>
+
         </MenuItem>
       </Menu>
     </React.Fragment>

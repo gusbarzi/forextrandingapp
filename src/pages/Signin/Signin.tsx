@@ -7,15 +7,20 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './signin.css';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import api from '../../shared/services/Api';
+import { UserContext } from '../../context/user';
+import { useNavigate } from 'react-router-dom';
+import Header from '../Homepage/Header/Header';
 
 const theme = createTheme();
 
 export default function SignIn() {
+    let navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const { login, setLogin, setUsuario } = useContext(UserContext);
 
     async function handleSubmit(e: any) {
         e.preventDefault();
@@ -24,15 +29,20 @@ export default function SignIn() {
                 email,
                 password
             })
-            console.log(userData.data);
+            localStorage.setItem('user_login', JSON.stringify(userData.data))
+            setLogin(true);
+            navigate('/');
+            setUsuario(userData.data)               
         } catch (err) {
-            console.log('Falha')
+            // console.log('Falha')
         }
     }
 
     return (
-        <ThemeProvider theme={theme}>
-                <Container classes={{root: 'cont'}} component="main" maxWidth="xs">
+        <>
+            <Header home={true} />
+            <ThemeProvider theme={theme}>
+                <Container classes={{ root: 'cont' }} component="main" maxWidth="xs">
                     <Box
                         sx={{
                             marginTop: 15,
@@ -95,6 +105,7 @@ export default function SignIn() {
                         </Box>
                     </Box>
                 </Container>
-        </ThemeProvider>
+            </ThemeProvider>
+        </>
     );
 }

@@ -5,15 +5,15 @@ import './header.css';
 
 
 
-const Header = ({ login }: any) => {
+const Header = ({ home }: any) => {
     return (
         <div>
             <header className="container">
                 <nav className="sign__in">
-                    <a className="nav__logo" href="/">Forex Tranding App</a>
+                    <a className="nav__logo" href={"/"}>Forex Tranding App</a>
 
                     {
-                        login === true && <ul className="nav__list">
+                        home === true && <ul className="nav__list">
                             <li>
                                 <Link to="/signin">
                                     <Button className="nav__button" color="primary">Sign in</Button>
@@ -28,7 +28,7 @@ const Header = ({ login }: any) => {
                     }
 
                     {
-                        login === false && <ul className="nav__list">
+                        home === false && <ul className="nav__list">
                             <li>
                                 <Link to="/portifolio">
                                     <Button classes={{root: 'button'}} color="primary">Wallet</Button>
