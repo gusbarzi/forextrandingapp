@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
@@ -8,17 +7,28 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './signin.css';
+import { useState } from 'react';
+import api from '../../shared/services/Api';
+
 const theme = createTheme();
 
 export default function SignIn() {
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
-            email: data.get('email'),
-            password: data.get('password'),
-        });
-    };
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+
+    async function handleSubmit(e: any) {
+        e.preventDefault();
+        try {
+            const userData = await api.post('/users/signin', {
+                email,
+                password
+            })
+            console.log(userData.data);
+        } catch (err) {
+            console.log('Falha')
+        }
+    }
 
     return (
         <ThemeProvider theme={theme}>
@@ -34,28 +44,38 @@ export default function SignIn() {
                         <Typography component="h1" variant="h5">
                             Sign in
                         </Typography>
-                        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                        <Box component="form" noValidate sx={{ mt: 1 }}>
+
                             <TextField
-                                margin="normal"
+                                autoFocus
                                 required
                                 fullWidth
+                                margin="normal"
                                 id="email"
                                 label="Email Address"
                                 name="email"
                                 autoComplete="email"
-                                autoFocus
+                                value={email}
+                                onChange={e => setEmail(e.target.value)}
+
                             />
+
+
                             <TextField
-                                margin="normal"
                                 required
                                 fullWidth
+                                margin="normal"
                                 name="password"
                                 label="Password"
                                 type="password"
                                 id="password"
                                 autoComplete="current-password"
+                                value={password}
+                                onChange={e => setPassword(e.target.value)}
                             />
+
                             <Button
+                                onClick={handleSubmit}
                                 type="submit"
                                 fullWidth
                                 variant="contained"
@@ -63,6 +83,7 @@ export default function SignIn() {
                             >
                                 Sign In
                             </Button>
+
                             <Grid container>
                                 <Grid item>
                                     <Link href="/register" variant="body2">
@@ -70,6 +91,7 @@ export default function SignIn() {
                                     </Link>
                                 </Grid>
                             </Grid>
+
                         </Box>
                     </Box>
                 </Container>

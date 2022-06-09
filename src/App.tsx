@@ -10,9 +10,10 @@ import Main from './pages/Homepage/Main/Main';
 import Register from './pages/Register/Register';
 import SignIn from './pages/Signin/Signin';
 import Transactions from './pages/Transactionspage/Transactions';
-//Hooks
-import { useState, useEffect } from 'react';
 import Trading from './pages/Trading/Trading';
+//Hooks
+import { useState, useContext } from 'react';
+
 
 export const App = () => {
   const [login, setLogin] = useState(false)
@@ -21,16 +22,16 @@ export const App = () => {
     <ThemeProvider theme={LightTheme}>
       <BrowserRouter>
 
-        {login === true ? <Header login={true} /> : <Header login={false} />}
+         {login === true ? <Header login={true} /> : <Header login={false} />}
 
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/portifolio" element={<Portifolio />} />
-          <Route path="/trading" element={<Trading />} />
-          <Route path="/transactions" element={<Transactions />} />
-        </Routes>
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/signin" element={<SignIn />} />
+            <Route path="/portifolio" element={<Portifolio />} />
+            <Route path="/trading" element={<Trading />} />
+            <Route path="/transactions" element={<Transactions />} />
+          </Routes>
 
       </BrowserRouter>
     </ThemeProvider>

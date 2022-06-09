@@ -3,26 +3,25 @@ import { Container, Typography, TextField, Button } from "@mui/material"
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 import './trading.css';
-import { AirlineSeatIndividualSuiteRounded } from '@mui/icons-material';
+import { DataObject } from '@mui/icons-material';
 
 export const Trading = () => {
     const [dolar, setDolar] = useState(0);
     const [libra, setLibra]: any = useState(0);
     const [total, setTotal]: any = useState();
-    const [depositValue, setValue] = useState("");
+    const [depositValue, setValue] = useState(""); 
 
-
+    
+    
     useEffect(() => {
-        const getData = async () => {
-            await axios
-                .get("https://economia.awesomeapi.com.br/last/GBP-USD")
-                .then((response) => {
-                    console.log(Number(response.data.GBPUSD.high));
-                    setDolar(response.data.GBPUSD.high);
-                })
-                .catch((error) => {
-                    console.log(error)
-                });
+        const getData = () => {
+            const ws = new WebSocket('wss://stream.binance.com:9443/ws/gbpusdt@bookTicker');
+
+            ws.onmessage = (event) => {
+                const obj = JSON.parse(event.data);
+                console.log(obj.a)
+                setDolar(obj.a)
+            }
         };
         getData();
     }, []);
@@ -31,7 +30,7 @@ export const Trading = () => {
         setTotal(dolar * libra);
     };
 
-    const deposit = async () => {
+    const gbp = async () => {
         await axios
         .post("https://localhost:3001/portifolio", {depositValue})
         .then((response) => {

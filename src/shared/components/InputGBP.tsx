@@ -1,4 +1,4 @@
-import { FormControl, InputAdornment, InputLabel, OutlinedInput } from "@mui/material"
+import { Button, FormControl, InputAdornment, InputLabel, OutlinedInput } from "@mui/material"
 import { useState } from "react";
 
 interface State {
@@ -16,8 +16,9 @@ const handleChange =
     }        
 
     return (
-        <FormControl fullWidth sx={{ m: 1 }}>
+        <FormControl fullWidth >
             <InputLabel color="secondary" htmlFor="outlined-adornment-amount">Amount</InputLabel>
+
             <OutlinedInput
                 color="secondary"
                 id="outlined-adornment-amount"
@@ -26,6 +27,7 @@ const handleChange =
                 startAdornment={<InputAdornment position="start">£</InputAdornment>}
                 label="Amount"
                 />
+                <Button color="success">Deposit</Button>
         </FormControl>
     )
 }

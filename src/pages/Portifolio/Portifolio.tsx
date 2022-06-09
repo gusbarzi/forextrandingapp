@@ -4,7 +4,9 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import Vinput, { InputGBP } from '../../shared/components/InputGBP';
-import { Container, Grid, Typography } from '@mui/material';
+import { Container, FormControl, Grid, InputAdornment, InputLabel, OutlinedInput, Typography } from '@mui/material';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import InputUSD from '../../shared/components/InputUSD';
 
 const style = {
@@ -21,14 +23,43 @@ const style = {
 };
 
 export const Portifolio = () => {
-    const [openGbp, setOpengbp] = React.useState(false);
-    const [openUsd, setOpenusd] = React.useState(false)
+    const [balance, setBalance] = useState(0);
+    const [gbpBalance, setBalanceGbp]: any = useState('');
+
+    //Modal open
+    const [openGbp, setOpengbp] = useState(false);
+    const [openUsd, setOpenusd] = useState(false)
 
     const handleOpengbp = () => setOpengbp(true);
     const handleOpenusd = () => setOpenusd(true);
 
     const handleClosegbp = () => setOpengbp(false);
     const handleCloseusd = () => setOpenusd(false);
+
+    const getDados = () => {
+        axios.get('http://localhost:3001/users/62a1589fca7aec93e1fe47d0')
+            .then((response) => {
+                setBalance(response.data.balance)
+                console.log(response.data)
+            }).catch((error) => {
+                console.log(error)
+            })
+    }
+
+    useEffect(() => {
+        getDados()
+    }, [balance])
+
+    const deposit = () => {
+        const balanceAdd = balance + Number(gbpBalance)
+        axios.patch('http://localhost:3001/users/62a1589fca7aec93e1fe47d0', { balance: balanceAdd }).then(() => {
+            getDados()
+            setBalanceGbp('')
+        }).catch((error) => {
+            console.log(error)
+        })
+    }
+
 
     return (
 
@@ -60,16 +91,16 @@ export const Portifolio = () => {
                             flexDirection: 'column',
                         }}
                     >
-                        <Typography 
+                        <Typography
                             sx={{
                                 height: 150
                             }}
 
-                        variant="h3"
+                            variant="h3"
                         >
                             Balance</Typography>
                         <Grid container rowSpacing={4} columnSpacing={{ xs: 2, sm: 3, md: 10 }}>
-                            
+
                             <Grid item xs={8}>
                                 <Typography
                                     sx={{
@@ -79,7 +110,7 @@ export const Portifolio = () => {
                                     gutterBottom
                                     component="div"
                                 >
-                                    GBP 0,00
+                                    GBP: {balance}
                                 </Typography>
                             </Grid>
 
@@ -117,8 +148,19 @@ export const Portifolio = () => {
                                 aria-describedby="modal-modal-description"
                             >
                                 <Box sx={style}>
-                                    <InputGBP />
-                                    <Button color="success">Deposit</Button>
+                                    <FormControl fullWidth >
+                                        <InputLabel color="secondary" htmlFor="outlined-adornment-amount">Amount</InputLabel>
+
+                                        <OutlinedInput
+                                            value={gbpBalance}
+                                            onChange={(e) => setBalanceGbp(e.target.value)}
+                                            color="secondary"
+                                            id="outlined-adornment-amount"
+                                            startAdornment={<InputAdornment position="start">£</InputAdornment>}
+                                            label="Amount"
+                                        />
+                                        <Button onClick={() => deposit()} color="success">Deposit</Button>
+                                    </FormControl>
                                 </Box>
                             </Modal>
                         </div>

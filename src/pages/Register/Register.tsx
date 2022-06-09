@@ -8,20 +8,33 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import './register.css';
+import { useState } from 'react';
+import api from '../../shared/services/Api';
 
 const theme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      firstName: data.get('firstName'),
-      lastName: data.get('lastName'),
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
+  const [lastName, setLastName] = useState('')
+  const [firstName, setFirstName] = useState('')
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+
+  async function handleSubmit(e: any) {
+    e.preventDefault();
+    try {
+      const userData = await api.post('/users', {
+        firstName,
+        lastName,
+        email,
+        password,
+        balance: 0
+      })
+      console.log(userData.data);
+    } catch (err) {
+      console.log(err);
+    }
+}
 
   return (
     <ThemeProvider theme={theme}>
@@ -40,16 +53,21 @@ export default function SignUp() {
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
+
                 <TextField
-                  autoComplete="given-name"
-                  name="firstName"
+                  autoFocus
                   required
                   fullWidth
+                  autoComplete="given-name"
+                  name="firstName"
                   id="firstName"
                   label="First Name"
-                  autoFocus
+                  value={firstName}
+                  onChange={e => setFirstName(e.target.value)}
                 />
+
               </Grid>
+
               <Grid item xs={12} sm={6}>
                 <TextField
                   required
@@ -58,8 +76,11 @@ export default function SignUp() {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                  value={lastName}
+                  onChange={e => setLastName(e.target.value)}
                 />
               </Grid>
+
               <Grid item xs={12}>
                 <TextField
                   required
@@ -68,8 +89,11 @@ export default function SignUp() {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  value={email}
+                  onChange={e => setEmail(e.target.value)}
                 />
               </Grid>
+
               <Grid item xs={12}>
                 <TextField
                   required
@@ -79,10 +103,14 @@ export default function SignUp() {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
                 />
               </Grid>
+
             </Grid>
             <Button
+              onClick={handleSubmit}
               type="submit"
               fullWidth
               variant="contained"
