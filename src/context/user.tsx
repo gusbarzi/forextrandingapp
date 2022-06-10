@@ -8,6 +8,7 @@ type UserContextData = {
     firstName: string;
     lastName: string;
     password: string;
+    createDate: string;
 }
 
 type PropsUserContext = {
@@ -29,6 +30,7 @@ const DEFAULT_VALUE = {
         firstName: '',
         lastName: '',
         password: '',
+        createDate: ''
     },
     setUsuario: () => {}
 }

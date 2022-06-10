@@ -7,13 +7,14 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import Logout from '@mui/icons-material/Logout';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { useState } from 'react';
 import { LogoutOutlined } from '@mui/icons-material';
 import Header from '../../pages/Homepage/Header/Header';
 
 export default function Userbutton() {
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -28,7 +29,8 @@ export default function Userbutton() {
   };
 
   const handleLogout = () => {
-    <Header home={true} />
+    window.location.reload();
+    localStorage.removeItem('user_login');
   }
 
   return (

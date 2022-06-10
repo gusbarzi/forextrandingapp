@@ -17,8 +17,8 @@ export const Trading = () => {
 
 
     useEffect(() => {
-        const getData = () => {
-            const ws = new WebSocket('wss://stream.binance.com:9443/ws/gbpusdt@bookTicker');
+        const getData = async() => {
+            const ws =  await new WebSocket('wss://stream.binance.com:9443/ws/gbpusdt@bookTicker');
 
             ws.onmessage = (event) => {
                 const obj = JSON.parse(event.data);
@@ -33,24 +33,32 @@ export const Trading = () => {
         setTotal(dolar * libra);
     };
 
-    const transaction = (data: JSON) => {
-        axios.post(`http://localhost:3001/transaction`, data)
-      .then((response) => {
-        console.log(data)
-      })
-      .catch((error) => {
-        console.log(error);
-      })
+    const body = {
+        userId: usuario._id,
+        firstName: usuario.firstName,
+        lastName: usuario.lastName,
+        balance: usuario.balance,
+        dateCreate: usuario.createDate,
+    }
+
+    const transaction = () => {
+        axios.post(`http://localhost:3001/transaction`, body)
+            .then((response) => {
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     }
 
     const trade = () => {
         const balanceAdd = total;
-        axios.patch(`http://localhost:3001/users/${usuario._id}`, { balance: usuario.balance - libra, dolar: usuario.dolar + balanceAdd }).then((response) => {
-            transaction(response.data)
-            setUsuario(response.data)
-        }).catch((error) => {
-            // console.log(error);
-        })
+        axios.patch(`http://localhost:3001/users/${usuario._id}`, { balance: usuario.balance - libra, dolar: usuario.dolar + balanceAdd })
+            .then((response) => {
+                transaction()
+                setUsuario(response.data)
+            }).catch((error) => {
+                // console.log(error);
+            })
     }
 
     return (

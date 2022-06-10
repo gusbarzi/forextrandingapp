@@ -15,7 +15,6 @@ interface IRequest {
 }
 
 export const Transactions = () => {
-
   const { usuario } = useContext(UserContext)
   const [transactions, setTransactions] = useState<Array<IRequest>>([]);
   useEffect(() => {
