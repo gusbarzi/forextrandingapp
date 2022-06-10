@@ -25,11 +25,7 @@ export default function SignIn() {
     async function handleSubmit(e: any) {
         e.preventDefault();
         if (email == '' || password == '') {
-<<<<<<< HEAD
-            alert('Está vazio')
-=======
             alert('empty field')
->>>>>>> c51eb7576bd7f5269d8ffdbef3acf7ee37493fc2
         } else {
             try {
                 const userData = await api.post('/users/signin', {

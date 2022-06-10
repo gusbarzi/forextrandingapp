@@ -4,11 +4,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import axios from 'axios';
 import Header from '../Homepage/Header/Header';
 import { UserContext } from '../../context/user';
-<<<<<<< HEAD
 import './transaction.css'
-=======
-import './transaction.css';
->>>>>>> c51eb7576bd7f5269d8ffdbef3acf7ee37493fc2
 
 interface IRequest {
   _id: string,
