@@ -4,7 +4,12 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import axios from 'axios';
 import Header from '../Homepage/Header/Header';
 import { UserContext } from '../../context/user';
+<<<<<<< HEAD
 import './transacs.css'
+=======
+import './transaction.css';
+
+>>>>>>> 8341922034a74159a77994eddbb049e619b6b5ac
 
 interface IRequest {
   _id: string,
@@ -54,7 +59,7 @@ export const Transactions = () => {
                   <th>ID</th>
                   <th>First Name</th>
                   <th>Last name</th>
-                  <th>Balance</th>
+                  <th>Balance (£)</th>
                   <th>Data</th>
                 </tr>
               </thead>

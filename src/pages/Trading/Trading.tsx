@@ -119,7 +119,7 @@ export const Trading = () => {
                                 }}
                                 margin="normal"
                             />
-                            <Typography>GPB(US$)</Typography>
+                            <Typography>GPB(£)</Typography>
                             <TextField
                                 color="secondary"
                                 size="small"
