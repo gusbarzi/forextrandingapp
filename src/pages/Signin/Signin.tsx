@@ -24,17 +24,21 @@ export default function SignIn() {
 
     async function handleSubmit(e: any) {
         e.preventDefault();
-        try {
-            const userData = await api.post('/users/signin', {
-                email,
-                password
-            })
-            localStorage.setItem('user_login', JSON.stringify(userData.data))
-            setLogin(true);
-            navigate('/');
-            setUsuario(userData.data)               
-        } catch (err) {
-            // console.log('Falha')
+        if (email == '' || password == '') {
+            alert('Está vazio')
+        } else {
+            try {
+                const userData = await api.post('/users/signin', {
+                    email,
+                    password
+                })
+                localStorage.setItem('user_login', JSON.stringify(userData.data))
+                setLogin(true);
+                navigate('/');
+                setUsuario(userData.data)
+            } catch (err) {
+                // console.log('Falha')
+            }
         }
     }
 
