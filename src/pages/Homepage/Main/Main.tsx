@@ -4,10 +4,13 @@ import Header from '../Header/Header';
 import './main.css'
 
 const Main = () => {
+
+    let logado = localStorage.getItem('user_login');
+
     const { login } = useContext(UserContext);
     return (
         <div>
-            {login == false ? <main>
+            {!logado ? <main>
                 <Header home={true} />
                 <div>
                     <div className="animated-title">

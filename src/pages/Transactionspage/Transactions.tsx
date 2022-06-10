@@ -4,6 +4,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import axios from 'axios';
 import Header from '../Homepage/Header/Header';
 import { UserContext } from '../../context/user';
+import './transaction.css'
 
 interface IRequest {
   _id: string,
@@ -15,7 +16,6 @@ interface IRequest {
 }
 
 export const Transactions = () => {
-
   const { usuario } = useContext(UserContext)
   const [transactions, setTransactions] = useState<Array<IRequest>>([]);
   useEffect(() => {
